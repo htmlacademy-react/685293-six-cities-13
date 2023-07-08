@@ -1,10 +1,12 @@
 import React from 'react';
 
 import {getPlaceTypeName, getWidthFromStarsRating} from './helpers';
-import {PlaceCardProps} from './place-card.props';
+import {PlaceCardI} from './place-card.props';
 
 
-function PlaceCard({isPremium, price, starsCount, description, type, imageUrl, isBookmarkActive}: PlaceCardProps) {
+function PlaceCard({placeCard}: {placeCard: PlaceCardI}) {
+
+  const {isBookmarkActive, starsCount, isPremium, price, type, imageUrl, description} = placeCard;
 
   const bookmarkActiveClass = isBookmarkActive ? 'place-card__bookmark-button--active' : '';
 

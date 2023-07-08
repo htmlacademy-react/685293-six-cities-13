@@ -4,7 +4,8 @@ export enum PlaceType {
   PrivateRoom = 'private'
 }
 
-export interface PlaceCardProps {
+export interface PlaceCardI {
+  id: number;
   isPremium: boolean;
   price: number;
   starsCount: number;
