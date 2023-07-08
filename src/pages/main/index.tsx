@@ -6,13 +6,7 @@ import {PlaceCardI} from 'src/components/place-card/place-card.props';
 
 function MainPage({cards}:{cards: PlaceCardI[]}): ReactElement {
 
-  const renderSFATable = (placeCards: PlaceCardI[]): ReactElement => (
-    <>
-      {
-        placeCards.map((card) => <PlaceCard placeCard={card} key={card.id}/>)
-      }
-    </>
-  );
+  const placeCards = cards.map((card) => <PlaceCard placeCard={card} key={card.id}/>);
 
   return (
     <div className="page page--gray page--main">
@@ -124,7 +118,7 @@ function MainPage({cards}:{cards: PlaceCardI[]}): ReactElement {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {renderSFATable(cards)}
+                {placeCards}
               </div>
             </section>
             <div className="cities__right-section">
