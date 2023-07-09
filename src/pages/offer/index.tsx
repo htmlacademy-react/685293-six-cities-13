@@ -1,7 +1,10 @@
 import React, {ReactElement} from 'react';
+// import { useParams } from 'react-router-dom';
 
 
 function OfferPage(): ReactElement {
+
+  // const { offerId } = useParams<{ offerId: string }>();
 
   return (
     <div className="page">
