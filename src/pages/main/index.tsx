@@ -1,12 +1,11 @@
 import React, {ReactElement} from 'react';
 
 import PlaceCard from 'src/components/place-card/place-card';
-import {PlaceCardI} from 'src/components/place-card/place-card.props';
+import {placeCardsMock} from 'src/mocks';
 
+function MainPage(): ReactElement {
 
-function MainPage({cards}:{cards: PlaceCardI[]}): ReactElement {
-
-  const placeCards = cards.map((card) => <PlaceCard placeCard={card} key={card.id}/>);
+  const placeCards = placeCardsMock.map((card) => <PlaceCard placeCard={card} key={card.id}/>);
 
   return (
     <div className="page page--gray page--main">
