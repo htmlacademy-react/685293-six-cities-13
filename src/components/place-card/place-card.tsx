@@ -1,19 +1,19 @@
 import React from 'react';
 
 import {getPlaceTypeName, getWidthFromStarsRating} from './helpers';
-import {PlaceCardI} from './place-card.props';
+import {Offer} from './place-card.props';
 
 
-function PlaceCard({placeCard}: {placeCard: PlaceCardI}) {
+function PlaceCard({placeCard}: {placeCard: Offer}) {
 
-  const {isBookmarkActive, starsCount, isPremium, price, type, imageUrl, description} = placeCard;
+  const {isFavorite, rating, isPremium, price, type, previewImage, title} = placeCard;
 
-  const bookmarkActiveClass = isBookmarkActive ? 'place-card__bookmark-button--active' : '';
+  const bookmarkActiveClass = isFavorite ? 'place-card__bookmark-button--active' : '';
 
 
   const placeTypeName = getPlaceTypeName(type);
 
-  const starsRatingWidth = getWidthFromStarsRating(starsCount);
+  const starsRatingWidth = getWidthFromStarsRating(rating);
 
   return (
     <article className="cities__card place-card">
@@ -24,7 +24,7 @@ function PlaceCard({placeCard}: {placeCard: PlaceCardI}) {
         <a href="#">
           <img
             className="place-card__image"
-            src={imageUrl}
+            src={previewImage}
             width={260}
             height={200}
             alt="Place image"
@@ -59,7 +59,7 @@ function PlaceCard({placeCard}: {placeCard: PlaceCardI}) {
         </div>
         <h2 className="place-card__name">
           <a href="#">
-            {description}
+            {title}
           </a>
         </h2>
         <p className="place-card__type">{placeTypeName}</p>

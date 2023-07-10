@@ -4,11 +4,11 @@ import {placeCardsMock} from 'src/mocks';
 import PlaceCard from 'src/components/place-card/place-card';
 
 function PlaceCards() {
-  const [activeCard, setActiveCard] = useState<null | number>(null);
+  const [activeCard, setActiveCard] = useState<null | string>(null);
 
   console.log(activeCard);
 
-  const onCardHover = (cardId: number):void => {
+  const onCardHover = (cardId: string):void => {
     setActiveCard(cardId);
   };
 
