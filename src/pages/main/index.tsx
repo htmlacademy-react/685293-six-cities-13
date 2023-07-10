@@ -1,11 +1,8 @@
 import React, {ReactElement} from 'react';
 
-import PlaceCard from 'src/components/place-card/place-card';
-import {placeCardsMock} from 'src/mocks';
+import PlaceCards from 'src/components/places-list/place-card';
 
 function MainPage(): ReactElement {
-
-  const placeCards = placeCardsMock.map((card) => <PlaceCard placeCard={card} key={card.id}/>);
 
   return (
     <div className="page page--gray page--main">
@@ -117,7 +114,7 @@ function MainPage(): ReactElement {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {placeCards}
+                <PlaceCards/>
               </div>
             </section>
             <div className="cities__right-section">

@@ -41,14 +41,4 @@ export const placeCardsMock: PlaceCardI[] = [
     description: 'Wood and stone place',
     type: PlaceType.Apartment
   },
-  {
-    id: 5,
-    isPremium: true,
-    imageUrl: 'img/room.jpg',
-    price: 120,
-    isBookmarkActive: true,
-    starsCount: 5,
-    description: 'Wood and stone place',
-    type: PlaceType.PrivateRoom
-  },
 ];
