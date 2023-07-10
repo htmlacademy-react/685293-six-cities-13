@@ -1,7 +1,7 @@
 
 export enum PlaceType {
   Apartment = 'apartment',
-  PrivateRoom = 'private'
+  PrivateRoom = 'room'
 }
 
 export interface Location {
