@@ -33,7 +33,9 @@ const Router: React.FC = () => (
       />
     </Route>
 
-    <Route path={`${AppRoute.Offer}/:offerId`} element={<OfferPage/>} />
+    <Route path={`${AppRoute.Offer}/:offerId`} element={<Layout/>}>
+      <Route index element={<OfferPage/>}/>
+    </Route>
 
     <Route path='*' element={<Page404/>} />
   </Routes>
