@@ -18,15 +18,13 @@ export enum AppRoute {
 
 const Router: React.FC = () => (
   <Routes>
-    <Route path={AppRoute.Main} element={<MainPage/>} />
+    <Route path={AppRoute.Main} element={<Layout/>}>
+      <Route index element={<MainPage/>}/>
+    </Route>
+
     <Route path={AppRoute.Login} element={<LoginPage/>} />
-    {/*<Route path={AppRoute.Favorites} element={*/}
-    {/*  <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>*/}
-    {/*    <FavoritesPage/>*/}
-    {/*  </PrivateRoute>*/}
-    {/*}*/}
-    {/*/>*/}
-    <Route path={AppRoute.Favorites} element={<Layout/>}>
+
+    <Route path={AppRoute.Favorites} element={<Layout withFooter/>}>
       <Route index element={
         <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
           <FavoritesPage/>
@@ -36,6 +34,7 @@ const Router: React.FC = () => (
     </Route>
 
     <Route path={`${AppRoute.Offer}/:offerId`} element={<OfferPage/>} />
+
     <Route path='*' element={<Page404/>} />
   </Routes>
 );

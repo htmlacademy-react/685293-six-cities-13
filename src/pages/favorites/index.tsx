@@ -28,6 +28,7 @@ function FavoritesPage(): ReactElement {
       </div>
     );
   }
+
   return (
     <div className="page">
       <main className="page__main page__main--favorites">

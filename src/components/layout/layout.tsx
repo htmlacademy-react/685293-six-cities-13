@@ -1,7 +1,15 @@
 import {ReactElement} from 'react';
-import {Outlet} from 'react-router-dom';
+import {NavLink, Outlet} from 'react-router-dom';
 
-function Layout(): ReactElement {
+import {AppRoute} from 'src/router';
+
+interface LayoutProps {
+  withFooter?: boolean;
+}
+
+function Layout(props: LayoutProps): ReactElement {
+
+  const {withFooter} = props;
 
   return (
     <div className="page">
@@ -9,7 +17,7 @@ function Layout(): ReactElement {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <NavLink to={AppRoute.Main} className={({isActive}) => isActive ? 'header__logo-link header__logo-link--active' : 'header__logo-link'}>
                 <img
                   className="header__logo"
                   src="img/logo.svg"
@@ -17,7 +25,7 @@ function Layout(): ReactElement {
                   width={81}
                   height={41}
                 />
-              </a>
+              </NavLink>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -44,17 +52,21 @@ function Layout(): ReactElement {
         </div>
       </header>
       <Outlet/>
-      <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
-          <img
-            className="footer__logo"
-            src="img/logo.svg"
-            alt="6 cities logo"
-            width={64}
-            height={33}
-          />
-        </a>
-      </footer>
+      {
+        withFooter && (
+          <footer className="footer container">
+            <NavLink to={AppRoute.Main} className="footer__logo-link">
+              <img
+                className="footer__logo"
+                src="img/logo.svg"
+                alt="6 cities logo"
+                width={64}
+                height={33}
+              />
+            </NavLink>
+          </footer>
+        )
+      }
     </div>
   );
 }
