@@ -1,4 +1,4 @@
-import {Offer, PlaceType} from '../components/place-card/place-card.props';
+import {City, Offer, PlaceType} from 'src/components/place-card/place-card.props';
 
 export const placeCardsMock: Offer[] = [
   {
@@ -94,3 +94,77 @@ export const placeCardsMock: Offer[] = [
     previewImage: 'img/room.jpg',
   },
 ];
+
+export const favoriteCardsMock: Offer[] = [
+  {
+    id: '1',
+    title: 'Wood and stone place',
+    type: PlaceType.Apartment,
+    price: 120,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 1,
+        longitude: 2,
+        zoom: 3
+      }
+    },
+    location: {
+      latitude: 1,
+      longitude: 2,
+      zoom: 3
+    },
+    isFavorite: true,
+    isPremium: true,
+    rating: 1,
+    previewImage: 'img/room.jpg',
+  },
+  {
+    id: '2',
+    title: 'Wood and stone place',
+    type: PlaceType.Apartment,
+    price: 120,
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 1,
+        longitude: 2,
+        zoom: 3
+      }
+    },
+    location: {
+      latitude: 1,
+      longitude: 2,
+      zoom: 3
+    },
+    isFavorite: true,
+    isPremium: true,
+    rating: 2,
+    previewImage: 'img/room.jpg',
+  },
+  {
+    id: '3',
+    title: 'Wood and stone place',
+    type: PlaceType.PrivateRoom,
+    price: 120,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 1,
+        longitude: 2,
+        zoom: 3
+      }
+    },
+    location: {
+      latitude: 1,
+      longitude: 2,
+      zoom: 3
+    },
+    isFavorite: true,
+    isPremium: false,
+    rating: 3,
+    previewImage: 'img/room.jpg',
+  },
+];
+
+
