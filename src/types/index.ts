@@ -1,8 +1,8 @@
 
-export enum PlaceType {
-  Apartment = 'apartment',
-  PrivateRoom = 'room'
-}
+export const PlaceType = {
+  apartment: 'Apartment',
+  private: 'Private room',
+} as const;
 
 export interface Location {
   latitude: number;
@@ -18,7 +18,7 @@ export interface City {
 export interface Offer {
   id: string;
   title: string;
-  type: PlaceType;
+  type: string;
   price: number;
   city: City;
   location: Location;

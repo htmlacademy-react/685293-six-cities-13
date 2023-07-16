@@ -4,7 +4,7 @@ export const placeCardsMock: Offer[] = [
   {
     id: '1',
     title: 'Wood and stone place',
-    type: PlaceType.Apartment,
+    type: PlaceType.apartment,
     price: 120,
     city: {
       name: 'Amsterdam',
@@ -27,7 +27,7 @@ export const placeCardsMock: Offer[] = [
   {
     id: '2',
     title: 'Wood and stone place',
-    type: PlaceType.Apartment,
+    type: PlaceType.apartment,
     price: 120,
     city: {
       name: 'Cologne',
@@ -50,7 +50,7 @@ export const placeCardsMock: Offer[] = [
   {
     id: '3',
     title: 'Wood and stone place',
-    type: PlaceType.PrivateRoom,
+    type: PlaceType.private,
     price: 120,
     city: {
       name: 'Amsterdam',
@@ -73,7 +73,7 @@ export const placeCardsMock: Offer[] = [
   {
     id: '4',
     title: 'Wood and stone place',
-    type: PlaceType.Apartment,
+    type: PlaceType.apartment,
     price: 120,
     city: {
       name: 'Amsterdam',
@@ -99,7 +99,7 @@ export const favoriteCardsMock: Offer[] = [
   {
     id: '1',
     title: 'Wood and stone place',
-    type: PlaceType.Apartment,
+    type: PlaceType.apartment,
     price: 120,
     city: {
       name: 'Amsterdam',
@@ -122,7 +122,7 @@ export const favoriteCardsMock: Offer[] = [
   {
     id: '2',
     title: 'Wood and stone place',
-    type: PlaceType.Apartment,
+    type: PlaceType.apartment,
     price: 120,
     city: {
       name: 'Cologne',
@@ -145,7 +145,7 @@ export const favoriteCardsMock: Offer[] = [
   {
     id: '3',
     title: 'Wood and stone place',
-    type: PlaceType.PrivateRoom,
+    type: PlaceType.private,
     price: 120,
     city: {
       name: 'Amsterdam',

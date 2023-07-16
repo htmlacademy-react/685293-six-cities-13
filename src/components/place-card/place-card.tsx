@@ -1,7 +1,8 @@
-import {getPlaceTypeName, getWidthFromStarsRating} from 'src/helpers';
-import {Offer} from 'src/types';
+import { getWidthFromStarsRating} from 'src/helpers';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../router';
+
+import {AppRoute} from 'src/router';
+import {Offer} from 'src/types';
 
 interface PlaceCardProps {
   placeCard: Offer;
@@ -11,7 +12,6 @@ function PlaceCard(props: PlaceCardProps) {
   const {placeCard: {id, isFavorite, rating, isPremium, price, type, previewImage, title}} = props;
 
   const bookmarkActiveClass = isFavorite ? 'place-card__bookmark-button--active' : '';
-  const placeTypeName = getPlaceTypeName(type);
   const starsRatingWidth = getWidthFromStarsRating(rating);
 
   return (
@@ -61,7 +61,7 @@ function PlaceCard(props: PlaceCardProps) {
             {title}
           </Link>
         </h2>
-        <p className="place-card__type">{placeTypeName}</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );

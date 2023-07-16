@@ -1,7 +1,7 @@
 import { ReactElement} from 'react';
 
 import {Offer} from 'src/types';
-import {getPlaceTypeName, getWidthFromStarsRating} from 'src/helpers';
+import {getWidthFromStarsRating} from 'src/helpers';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../router';
 
@@ -15,8 +15,6 @@ function FavoriteCard(props: FavoriteLocationItemProps): ReactElement {
 
   const starsRatingWidth = getWidthFromStarsRating(offer.rating);
   const bookmarkActiveClass = offer.isFavorite ? 'place-card__bookmark-button--active' : '';
-  const placeTypeName = getPlaceTypeName(offer.type);
-
 
   return (
     <article className="favorites__card place-card">
@@ -67,7 +65,7 @@ function FavoriteCard(props: FavoriteLocationItemProps): ReactElement {
             {offer.title}
           </Link>
         </h2>
-        <p className="place-card__type">{placeTypeName}</p>
+        <p className="place-card__type">{offer.type}</p>
       </div>
     </article>
   );
