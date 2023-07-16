@@ -2,6 +2,8 @@ import { ReactElement} from 'react';
 
 import {Offer} from 'src/types';
 import {getPlaceTypeName, getWidthFromStarsRating} from 'src/helpers';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../router';
 
 interface FavoriteLocationItemProps {
   offer: Offer;
@@ -61,7 +63,9 @@ function FavoriteCard(props: FavoriteLocationItemProps): ReactElement {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <Link to={`${AppRoute.Offer}/${offer.id}`}>
+            {offer.title}
+          </Link>
         </h2>
         <p className="place-card__type">{placeTypeName}</p>
       </div>
