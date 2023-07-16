@@ -1,19 +1,18 @@
-import React from 'react';
+import { getWidthFromStarsRating} from 'src/helpers';
+import {Link} from 'react-router-dom';
 
-import {getPlaceTypeName, getWidthFromStarsRating} from './helpers';
-import {PlaceCardI} from './place-card.props';
+import {AppRoute} from 'src/router';
+import {Offer} from 'src/types';
 
+interface PlaceCardProps {
+  placeCard: Offer;
+}
 
-function PlaceCard({placeCard}: {placeCard: PlaceCardI}) {
+function PlaceCard(props: PlaceCardProps) {
+  const {placeCard: {id, isFavorite, rating, isPremium, price, type, previewImage, title}} = props;
 
-  const {isBookmarkActive, starsCount, isPremium, price, type, imageUrl, description} = placeCard;
-
-  const bookmarkActiveClass = isBookmarkActive ? 'place-card__bookmark-button--active' : '';
-
-
-  const placeTypeName = getPlaceTypeName(type);
-
-  const starsRatingWidth = getWidthFromStarsRating(starsCount);
+  const bookmarkActiveClass = isFavorite ? 'place-card__bookmark-button--active' : '';
+  const starsRatingWidth = getWidthFromStarsRating(rating);
 
   return (
     <article className="cities__card place-card">
@@ -24,7 +23,7 @@ function PlaceCard({placeCard}: {placeCard: PlaceCardI}) {
         <a href="#">
           <img
             className="place-card__image"
-            src={imageUrl}
+            src={previewImage}
             width={260}
             height={200}
             alt="Place image"
@@ -58,11 +57,11 @@ function PlaceCard({placeCard}: {placeCard: PlaceCardI}) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">
-            {description}
-          </a>
+          <Link to={`${AppRoute.Offer}/${id}`}>
+            {title}
+          </Link>
         </h2>
-        <p className="place-card__type">{placeTypeName}</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );

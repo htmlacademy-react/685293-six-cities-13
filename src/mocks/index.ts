@@ -1,54 +1,170 @@
-import {PlaceCardI, PlaceType} from '../components/place-card/place-card.props';
+import { Offer, PlaceType} from 'src/types';
 
-export const placeCardsMock: PlaceCardI[] = [
+export const placeCardsMock: Offer[] = [
   {
-    id: 1,
-    isPremium: true,
-    imageUrl: 'img/room.jpg',
+    id: '1',
+    title: 'Wood and stone place',
+    type: PlaceType.apartment,
     price: 120,
-    isBookmarkActive: true,
-    starsCount: 1,
-    description: 'Wood and stone place',
-    type: PlaceType.Apartment
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 1,
+        longitude: 2,
+        zoom: 3
+      }
+    },
+    location: {
+      latitude: 1,
+      longitude: 2,
+      zoom: 3
+    },
+    isFavorite: true,
+    isPremium: true,
+    rating: 1,
+    previewImage: 'img/room.jpg',
   },
   {
-    id: 2,
+    id: '2',
+    title: 'Wood and stone place',
+    type: PlaceType.apartment,
+    price: 120,
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 1,
+        longitude: 2,
+        zoom: 3
+      }
+    },
+    location: {
+      latitude: 1,
+      longitude: 2,
+      zoom: 3
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 2,
+    previewImage: 'img/room.jpg',
+  },
+  {
+    id: '3',
+    title: 'Wood and stone place',
+    type: PlaceType.private,
+    price: 120,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 1,
+        longitude: 2,
+        zoom: 3
+      }
+    },
+    location: {
+      latitude: 1,
+      longitude: 2,
+      zoom: 3
+    },
+    isFavorite: true,
     isPremium: false,
-    imageUrl: 'img/room.jpg',
-    price: 120,
-    isBookmarkActive: true,
-    starsCount: 2,
-    description: 'Wood and stone place',
-    type: PlaceType.Apartment
+    rating: 3,
+    previewImage: 'img/room.jpg',
   },
   {
-    id: 3,
-    isPremium: true,
-    imageUrl: 'img/room.jpg',
+    id: '4',
+    title: 'Wood and stone place',
+    type: PlaceType.apartment,
     price: 120,
-    isBookmarkActive: false,
-    starsCount: 3,
-    description: 'Wood and stone place',
-    type: PlaceType.PrivateRoom
-  },
-  {
-    id: 4,
-    isPremium: true,
-    imageUrl: 'img/room.jpg',
-    price: 120,
-    isBookmarkActive: true,
-    starsCount: 4,
-    description: 'Wood and stone place',
-    type: PlaceType.Apartment
-  },
-  {
-    id: 5,
-    isPremium: true,
-    imageUrl: 'img/room.jpg',
-    price: 120,
-    isBookmarkActive: true,
-    starsCount: 5,
-    description: 'Wood and stone place',
-    type: PlaceType.PrivateRoom
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 1,
+        longitude: 2,
+        zoom: 3
+      }
+    },
+    location: {
+      latitude: 1,
+      longitude: 2,
+      zoom: 3
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 1,
+    previewImage: 'img/room.jpg',
   },
 ];
+
+export const favoriteCardsMock: Offer[] = [
+  {
+    id: '1',
+    title: 'Wood and stone place',
+    type: PlaceType.apartment,
+    price: 120,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 1,
+        longitude: 2,
+        zoom: 3
+      }
+    },
+    location: {
+      latitude: 1,
+      longitude: 2,
+      zoom: 3
+    },
+    isFavorite: true,
+    isPremium: true,
+    rating: 1,
+    previewImage: 'img/room.jpg',
+  },
+  {
+    id: '2',
+    title: 'Wood and stone place',
+    type: PlaceType.apartment,
+    price: 120,
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 1,
+        longitude: 2,
+        zoom: 3
+      }
+    },
+    location: {
+      latitude: 1,
+      longitude: 2,
+      zoom: 3
+    },
+    isFavorite: true,
+    isPremium: true,
+    rating: 2,
+    previewImage: 'img/room.jpg',
+  },
+  {
+    id: '3',
+    title: 'Wood and stone place',
+    type: PlaceType.private,
+    price: 120,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 1,
+        longitude: 2,
+        zoom: 3
+      }
+    },
+    location: {
+      latitude: 1,
+      longitude: 2,
+      zoom: 3
+    },
+    isFavorite: true,
+    isPremium: false,
+    rating: 3,
+    previewImage: 'img/room.jpg',
+  },
+];
+
+
