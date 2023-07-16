@@ -1,18 +1,15 @@
-import React from 'react';
+import {getPlaceTypeName, getWidthFromStarsRating} from 'src/helpers';
+import {Offer} from 'src/types';
 
-import {getPlaceTypeName, getWidthFromStarsRating} from './helpers';
-import {Offer} from './place-card.props';
+interface PlaceCardProps {
+  placeCard: Offer;
+}
 
-
-function PlaceCard({placeCard}: {placeCard: Offer}) {
-
-  const {isFavorite, rating, isPremium, price, type, previewImage, title} = placeCard;
+function PlaceCard(props: PlaceCardProps) {
+  const {placeCard: {isFavorite, rating, isPremium, price, type, previewImage, title}} = props;
 
   const bookmarkActiveClass = isFavorite ? 'place-card__bookmark-button--active' : '';
-
-
   const placeTypeName = getPlaceTypeName(type);
-
   const starsRatingWidth = getWidthFromStarsRating(rating);
 
   return (

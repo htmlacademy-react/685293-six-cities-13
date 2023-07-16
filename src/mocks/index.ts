@@ -1,4 +1,4 @@
-import {City, Offer, PlaceType} from 'src/components/place-card/place-card.props';
+import { Offer, PlaceType} from 'src/types';
 
 export const placeCardsMock: Offer[] = [
   {

@@ -1,6 +1,6 @@
-import React, {ReactElement} from 'react';
+import {ReactElement} from 'react';
 
-import PlaceCards from 'src/components/places-list/place-card';
+import PlacesList from 'src/components/places-list/place-list.tsx';
 
 function MainPage(): ReactElement {
 
@@ -114,7 +114,7 @@ function MainPage(): ReactElement {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCards/>
+                <PlacesList/>
               </div>
             </section>
             <div className="cities__right-section">

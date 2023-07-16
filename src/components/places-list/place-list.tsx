@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 
 import {placeCardsMock} from 'src/mocks';
 import PlaceCard from 'src/components/place-card/place-card';
 
-function PlaceCards() {
+function PlacesList() {
   const [activeCard, setActiveCard] = useState<null | string>(null);
 
   console.log(activeCard);
@@ -24,4 +24,4 @@ function PlaceCards() {
 }
 
 
-export default PlaceCards;
+export default PlacesList;
