@@ -2,6 +2,7 @@ import {ReactElement, useState} from 'react';
 
 import PlacesList from 'src/components/places-list/place-list.tsx';
 import Map from 'src/components/map/map.tsx';
+import {favoriteCardsMock} from '../../mocks';
 function MainPage(): ReactElement {
   const [activeLocationId, setActiveLocationId] = useState<null | string>(null);
 
@@ -78,11 +79,11 @@ function MainPage(): ReactElement {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlacesList setActiveLocationId={setActiveLocationId} />
+                <PlacesList places={favoriteCardsMock} setActiveLocationId={setActiveLocationId} cardsClassName={'cities__card'} />
               </div>
             </section>
             <div className="cities__right-section">
-              <Map activeLocationId={activeLocationId}/>
+              <Map activeLocationId={activeLocationId} className={'cities__map'} places={favoriteCardsMock}/>
             </div>
           </div>
         </div>
