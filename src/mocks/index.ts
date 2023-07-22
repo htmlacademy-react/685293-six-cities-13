@@ -1,4 +1,4 @@
-import { Offer, PlaceType} from 'src/types';
+import {City, Offer, PlaceType} from 'src/types';
 
 export const placeCardsMock: Offer[] = [
   {
@@ -15,9 +15,8 @@ export const placeCardsMock: Offer[] = [
       }
     },
     location: {
-      latitude: 1,
-      longitude: 2,
-      zoom: 3
+      latitude: 52.390955,
+      longitude: 4.853096,
     },
     isFavorite: true,
     isPremium: true,
@@ -38,9 +37,8 @@ export const placeCardsMock: Offer[] = [
       }
     },
     location: {
-      latitude: 1,
-      longitude: 2,
-      zoom: 3
+      latitude: 52.360955,
+      longitude: 4.853096,
     },
     isFavorite: false,
     isPremium: true,
@@ -61,9 +59,8 @@ export const placeCardsMock: Offer[] = [
       }
     },
     location: {
-      latitude: 1,
-      longitude: 2,
-      zoom: 3
+      latitude: 52.390955,
+      longitude: 4.929309,
     },
     isFavorite: true,
     isPremium: false,
@@ -84,9 +81,8 @@ export const placeCardsMock: Offer[] = [
       }
     },
     location: {
-      latitude: 1,
-      longitude: 2,
-      zoom: 3
+      latitude: 52.380955,
+      longitude: 4.939309,
     },
     isFavorite: false,
     isPremium: false,
@@ -167,4 +163,11 @@ export const favoriteCardsMock: Offer[] = [
   },
 ];
 
-
+export const CITY: City = {
+  name: 'Amsterdam',
+  location: {
+    latitude: 52.37 ,
+    longitude: 4.90,
+    zoom: 12,
+  }
+};

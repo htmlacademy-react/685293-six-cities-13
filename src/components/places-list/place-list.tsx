@@ -1,19 +1,19 @@
-import {useState} from 'react';
-
 import {placeCardsMock} from 'src/mocks';
 import PlaceCard from 'src/components/place-card/place-card';
 
-function PlacesList() {
-  const [activeCard, setActiveCard] = useState<null | string>(null);
+interface PlacesListProps {
+  setActiveLocationId: (cardId: string | null) => void;
+}
 
-  console.log(activeCard);
+function PlacesList(props: PlacesListProps) {
+  const {setActiveLocationId} = props;
 
   const onCardHover = (cardId: string):void => {
-    setActiveCard(cardId);
+    setActiveLocationId(cardId);
   };
 
   const onCardUnhover = (): void => {
-    setActiveCard(null);
+    setActiveLocationId(null);
   };
 
   return (
