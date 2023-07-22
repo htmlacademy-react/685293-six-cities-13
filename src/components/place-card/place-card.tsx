@@ -6,16 +6,17 @@ import {Offer} from 'src/types';
 
 interface PlaceCardProps {
   placeCard: Offer;
+  cardsClassName?: string;
 }
 
 function PlaceCard(props: PlaceCardProps) {
-  const {placeCard: {id, isFavorite, rating, isPremium, price, type, previewImage, title}} = props;
+  const {placeCard: {id, isFavorite, rating, isPremium, price, type, previewImage, title}, cardsClassName = ''} = props;
 
   const bookmarkActiveClass = isFavorite ? 'place-card__bookmark-button--active' : '';
   const starsRatingWidth = getWidthFromStarsRating(rating);
 
   return (
-    <article className="cities__card place-card">
+    <article className={`${cardsClassName} place-card`}>
       {
         isPremium && <div className="place-card__mark"><span>Premium</span></div>
       }

@@ -3,16 +3,19 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import useMap from 'src/hooks/map.ts';
-import {CITY, placeCardsMock} from 'src/mocks';
+import {CITY} from 'src/mocks';
+import {Offer} from 'src/types';
 
 const URL_MARKER_DEFAULT = '/img/pin.svg';
 const URL_MARKER_CURRENT = '/img/pin-active.svg';
 
 interface MapProps {
   activeLocationId: string | null;
+  className?: string;
+  places: Offer[];
 }
 function Map(props: MapProps): ReactElement {
-  const {activeLocationId} = props;
+  const {className = '', activeLocationId, places} = props;
   const mapRef = useRef<null | HTMLElement>(null);
   const map = useMap(mapRef, CITY);
 
@@ -26,7 +29,7 @@ function Map(props: MapProps): ReactElement {
 
   useEffect(() => {
     if (map) {
-      placeCardsMock.forEach((point) => {
+      places.forEach((point) => {
         leaflet
           .marker({
             lat: point.location.latitude,
@@ -37,9 +40,9 @@ function Map(props: MapProps): ReactElement {
           .addTo(map);
       });
     }
-  }, [map, activeLocationId, currentCustomIcon, defaultCustomIcon]);
+  }, [map, activeLocationId, currentCustomIcon, defaultCustomIcon, places]);
 
-  return (<section ref={mapRef} className="cities__map map" />);
+  return (<section ref={mapRef} className={`${className} map`} />);
 }
 
 export default Map;
