@@ -7,7 +7,7 @@ export const PlaceType = {
 export interface Location {
   latitude: number;
   longitude: number;
-  zoom: number;
+  zoom?: number;
 }
 
 export interface City {
