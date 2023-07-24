@@ -1,4 +1,4 @@
-import {City, Offer, PlaceType, Review} from 'src/types';
+import {City, Offer, Review} from 'src/types';
 
 export const placeCardsMock: Offer[] = [
   {
@@ -43,7 +43,7 @@ export const placeCardsMock: Offer[] = [
       longitude: 2.330499,
       zoom: 16
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     rating: 3.3
   },
@@ -227,7 +227,7 @@ export const placeCardsMock: Offer[] = [
       longitude: 2.369499,
       zoom: 16
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     rating: 1.1
   },
@@ -549,7 +549,7 @@ export const placeCardsMock: Offer[] = [
       longitude: 6.9799739999999995,
       zoom: 16
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     rating: 1.4
   },
@@ -2761,147 +2761,6 @@ export const placeCardsMock: Offer[] = [
     isPremium: false,
     rating: 3.7
   }
-];
-
-export const nearCardsMock: Offer[] = [
-  {
-    id: '1',
-    title: 'Wood and stone place',
-    type: PlaceType.apartment,
-    price: 120,
-    city: {
-      name: 'Amsterdam',
-      location: {
-        latitude: 1,
-        longitude: 2,
-        zoom: 3
-      }
-    },
-    location: {
-      latitude: 52.390955,
-      longitude: 4.853096,
-    },
-    isFavorite: true,
-    isPremium: true,
-    rating: 1,
-    previewImage: 'img/room.jpg',
-  },
-  {
-    id: '2',
-    title: 'Wood and stone place',
-    type: PlaceType.apartment,
-    price: 120,
-    city: {
-      name: 'Cologne',
-      location: {
-        latitude: 1,
-        longitude: 2,
-        zoom: 3
-      }
-    },
-    location: {
-      latitude: 52.360955,
-      longitude: 4.853096,
-    },
-    isFavorite: false,
-    isPremium: true,
-    rating: 2,
-    previewImage: 'img/room.jpg',
-  },
-  {
-    id: '3',
-    title: 'Wood and stone place',
-    type: PlaceType.private,
-    price: 120,
-    city: {
-      name: 'Amsterdam',
-      location: {
-        latitude: 1,
-        longitude: 2,
-        zoom: 3
-      }
-    },
-    location: {
-      latitude: 52.390955,
-      longitude: 4.929309,
-    },
-    isFavorite: true,
-    isPremium: false,
-    rating: 3,
-    previewImage: 'img/room.jpg',
-  },
-];
-
-export const favoriteCardsMock: Offer[] = [
-  {
-    id: '1',
-    title: 'Wood and stone place',
-    type: PlaceType.apartment,
-    price: 120,
-    city: {
-      name: 'Amsterdam',
-      location: {
-        latitude: 1,
-        longitude: 2,
-        zoom: 3
-      }
-    },
-    location: {
-      latitude: 1,
-      longitude: 2,
-      zoom: 3
-    },
-    isFavorite: true,
-    isPremium: true,
-    rating: 1,
-    previewImage: 'img/room.jpg',
-  },
-  {
-    id: '2',
-    title: 'Wood and stone place',
-    type: PlaceType.apartment,
-    price: 120,
-    city: {
-      name: 'Cologne',
-      location: {
-        latitude: 1,
-        longitude: 2,
-        zoom: 3
-      }
-    },
-    location: {
-      latitude: 1,
-      longitude: 2,
-      zoom: 3
-    },
-    isFavorite: true,
-    isPremium: true,
-    rating: 2,
-    previewImage: 'img/room.jpg',
-  },
-  {
-    id: '3',
-    title: 'Wood and stone place',
-    type: PlaceType.private,
-    price: 120,
-    city: {
-      name: 'Amsterdam',
-      location: {
-        latitude: 1,
-        longitude: 2,
-        zoom: 3
-      }
-    },
-    location: {
-      latitude: 1,
-      longitude: 2,
-      zoom: 3
-    },
-    isFavorite: true,
-    isPremium: false,
-    rating: 3,
-    previewImage: 'img/room.jpg',
-  },
 ];
 
 export const REVIEWS: Review[] = [

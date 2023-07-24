@@ -41,3 +41,10 @@ export interface Review {
   comment: string;
   rating: number;
 }
+
+export const SortType = {
+  popular: 'Popular',
+  priceAsc: 'Price: low to high',
+  priceDesc: 'Price: high to low',
+  rating: 'Top rated first',
+} as const;

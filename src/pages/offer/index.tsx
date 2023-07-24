@@ -1,16 +1,26 @@
-import {ReactElement, useState} from 'react';
+import {ReactElement, useMemo, useState} from 'react';
+import {useSelector} from 'react-redux';
 // import { useParams } from 'react-router-dom';
+
 import FeedbackForm from 'src/components/feedback-form/feedback-form.tsx';
 import {AuthorizationStatus} from 'src/router/private-route';
-import ReviewsList from '../../components/reviews-list/place-list.tsx';
-import {nearCardsMock, REVIEWS} from '../../mocks';
-import Map from '../../components/map/map.tsx';
-import PlacesList from '../../components/places-list/place-list.tsx';
+import ReviewsList from 'src/components/reviews-list/place-list.tsx';
+import {REVIEWS} from 'src/mocks';
+import Map from 'src/components/map/map.tsx';
+import PlacesList from 'src/components/places-list/place-list.tsx';
+import {StateI} from 'src/store/reducer.ts';
 
 function OfferPage(): ReactElement {
   const [activeLocationId, setActiveLocationId] = useState<null | string>(null);
   // const { offerId } = useParams<{ offerId: string }>();
   const authStatus: AuthorizationStatus = AuthorizationStatus.Auth;
+  const allOffers = useSelector((store: StateI) => store.offers);
+  const city = useSelector((store: StateI) => store.city);
+
+  const currentCityOffers = useMemo(
+    () => allOffers?.filter((offer) => offer.city.name === city.name) || [],
+    [allOffers, city]
+  );
 
   return (
     <div className="page">
@@ -153,7 +163,7 @@ function OfferPage(): ReactElement {
               </section>
             </div>
           </div>
-          <Map activeLocationId={activeLocationId} className={'offer__map'} places={nearCardsMock}/>
+          <Map activeLocationId={activeLocationId} className={'offer__map'} places={currentCityOffers}/>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -161,7 +171,7 @@ function OfferPage(): ReactElement {
               Other places in the neighbourhood
             </h2>
             <div className="near-places__list places__list">
-              <PlacesList cardsClassName={'near-places__card'} setActiveLocationId={setActiveLocationId} places={nearCardsMock}/>
+              <PlacesList cardsClassName={'near-places__card'} setActiveLocationId={setActiveLocationId} places={currentCityOffers}/>
             </div>
           </section>
         </div>
