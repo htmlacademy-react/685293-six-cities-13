@@ -27,8 +27,10 @@ function useMap(mapRef: RefObject<HTMLElement>, city: City) {
 
       setMap(instance);
       isRenderedRef.current = true;
+    } else {
+      map?.setView({lat: city.location.latitude, lng: city.location.longitude}, city.location.zoom);
     }
-  }, [mapRef, city]);
+  }, [mapRef, city, map]);
 
   return map;
 }
