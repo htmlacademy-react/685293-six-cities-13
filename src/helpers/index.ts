@@ -18,3 +18,23 @@ export const groupOffersByCity = (offers: Offer[]): [string, Offer[]][] => {
 
   return Object.entries(groupedOffers);
 };
+
+
+export const sortByPrice = (arr: Offer[], sortOrder: 'asc' | 'desc'): Offer[] => {
+  if (sortOrder === 'asc') {
+    arr.sort((a, b) => a.price - b.price);
+  } else if (sortOrder === 'desc') {
+    arr.sort((a, b) => b.price - a.price);
+  } else {
+    throw new Error('Invalid sortOrder. Use \'asc\' or \'desc\'.');
+  }
+
+  return arr;
+};
+
+
+export const sortByRating = (arr: Offer[]): Offer[] => {
+  arr.sort((a, b) => b.rating - a.rating);
+
+  return arr;
+};
