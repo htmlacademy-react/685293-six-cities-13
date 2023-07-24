@@ -1,6 +1,5 @@
 import {Offer} from 'src/types';
 
-
 export const getWidthFromStarsRating = (rating: number): string => {
   const oneStarWidth = 20;
   return `${oneStarWidth * rating}%`;
