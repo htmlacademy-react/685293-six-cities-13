@@ -1,13 +1,22 @@
-import {ReactElement} from 'react';
+import {ReactElement, useMemo} from 'react';
+import {useSelector} from 'react-redux';
+import {StateI} from 'src/store/reducer.ts';
 
-import {favoriteCardsMock} from 'src/mocks';
 import {groupOffersByCity} from 'src/helpers';
 import FavoriteLocationItem from 'src/components/favorite-location-item/favorite-location-item.tsx';
 
 function FavoritesPage(): ReactElement {
+  const allOffers = useSelector((store: StateI) => store.offers);
 
-  const formattedFavoriteMocks = groupOffersByCity(favoriteCardsMock);
-  const favoriteLocations = formattedFavoriteMocks.map((location) => <FavoriteLocationItem key={location[0]} cityName={location[0]} offers={location[1]}/>);
+  const favoriteCityOffers = useMemo(
+    () => {
+      const filteredOffers = allOffers?.filter((offer) => offer.isFavorite) || [];
+      return groupOffersByCity(filteredOffers);
+    },
+    [allOffers]
+  );
+
+  const favoriteLocations = favoriteCityOffers.map((location) => <FavoriteLocationItem key={location[0]} cityName={location[0]} offers={location[1]}/>);
 
   if (!favoriteLocations || favoriteLocations.length === 0) {
     return (
