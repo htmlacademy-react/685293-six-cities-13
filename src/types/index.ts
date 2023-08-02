@@ -1,3 +1,4 @@
+import {store} from 'src/store';
 
 export const PlaceType = {
   apartment: 'Apartment',
@@ -28,10 +29,12 @@ export interface Offer {
   previewImage: string;
 }
 
-interface User {
+export interface User {
   name: string;
   avatarUrl: string;
   isPro: boolean;
+  email: string;
+  token: string;
 }
 
 export interface Review {
@@ -48,3 +51,18 @@ export const SortType = {
   priceDesc: 'Price: high to low',
   rating: 'Top rated first',
 } as const;
+
+export type State = ReturnType<typeof store.getState>
+
+export type AppDispatch = typeof store.dispatch
+
+export interface AuthData {
+ email: string;
+ password: string;
+}
+
+export enum APIRoute {
+  Login = '/login',
+  Logout = '/logout',
+  Offers = '/offers'
+}

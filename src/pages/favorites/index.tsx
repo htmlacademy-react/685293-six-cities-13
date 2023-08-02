@@ -1,12 +1,11 @@
 import {ReactElement, useMemo} from 'react';
-import {useSelector} from 'react-redux';
-import {StateI} from 'src/store/reducer.ts';
 
 import {groupOffersByCity} from 'src/helpers';
 import FavoriteLocationItem from 'src/components/favorite-location-item/favorite-location-item.tsx';
+import {useAppSelector} from 'src/hooks/redux.ts';
 
 function FavoritesPage(): ReactElement {
-  const allOffers = useSelector((store: StateI) => store.offers);
+  const allOffers = useAppSelector((store) => store.offers);
 
   const favoriteCityOffers = useMemo(
     () => {

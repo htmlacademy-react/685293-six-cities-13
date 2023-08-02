@@ -1,7 +1,6 @@
-import {useSelector, useDispatch} from 'react-redux';
-import {StateI} from 'src/store/reducer.ts';
 import {City} from 'src/types';
 import {changeCity} from 'src/store/action.ts';
+import {useAppDispatch, useAppSelector} from 'src/hooks/redux.ts';
 
 interface CityItemProps {
   city: City;
@@ -9,8 +8,8 @@ interface CityItemProps {
 
 function CityItem(props: CityItemProps) {
   const {city} = props;
-  const dispatch = useDispatch();
-  const currentCity = useSelector((store: StateI) => store.city);
+  const dispatch = useAppDispatch();
+  const currentCity = useAppSelector((store) => store.city);
 
   const activeClass = city.name === currentCity.name ? 'tabs__item--active' : '';
 

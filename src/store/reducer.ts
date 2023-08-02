@@ -1,34 +1,57 @@
 import {createReducer} from '@reduxjs/toolkit';
 
 import {City, Offer, SortType} from 'src/types';
-import {CITIES, placeCardsMock} from 'src/mocks';
+import {CITIES} from 'src/mocks';
+import {AuthorizationStatus} from 'src/router/private-route';
 
-import {addOffers, changeCity, changeSortBy} from './action.ts';
-
+import {
+  addOffers,
+  changeCity,
+  changeSortBy,
+  loadOffers,
+  requireAuthorization,
+  setOffersDataLoadingStatus
+} from './action.ts';
 
 export interface StateI {
   city: City;
-  offers: null | Offer[];
+  offers: Offer[];
   sortBy: string;
+  authorizationStatus: AuthorizationStatus;
+  questionsLoadingStatus: boolean;
 }
 
 const initialState: StateI = {
   city: CITIES[0],
-  offers: placeCardsMock,
-  sortBy: SortType.popular
+  offers: [],
+  sortBy: SortType.popular,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  questionsLoadingStatus: false
 };
 
 const reducer = createReducer(initialState, (builder)=>{
-  builder.addCase(changeCity, (state, payload) => {
-    state.city = payload.payload;
+  builder.addCase(changeCity, (state, action) => {
+    state.city = action.payload;
   });
 
   builder.addCase(addOffers, (state) => {
-    state.offers = null;
+    state.offers = [];
   });
 
-  builder.addCase(changeSortBy, (state, payload) => {
-    state.sortBy = payload.payload;
+  builder.addCase(changeSortBy, (state, action) => {
+    state.sortBy = action.payload;
+  });
+
+  builder.addCase(loadOffers, (state, action) => {
+    state.offers = action.payload;
+  });
+
+  builder.addCase(requireAuthorization, (state, action) => {
+    state.authorizationStatus = action.payload;
+  });
+
+  builder.addCase(setOffersDataLoadingStatus, (state, action) => {
+    state.questionsLoadingStatus = action.payload;
   });
 });
 

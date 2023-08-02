@@ -1,14 +1,12 @@
 import {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
 
-import {StateI} from 'src/store/reducer.ts';
 import { changeSortBy} from 'src/store/action.ts';
 import {SortType} from 'src/types';
-
+import {useAppDispatch, useAppSelector} from 'src/hooks/redux.ts';
 
 function Sort() {
-  const dispatch = useDispatch();
-  const currentSort = useSelector((store: StateI) => store.sortBy);
+  const dispatch = useAppDispatch();
+  const currentSort = useAppSelector((store) => store.sortBy);
   const [isOpened, setIsOpened] = useState(false);
 
   const onSortItemClick = (sortBy: string) => {
