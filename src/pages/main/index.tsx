@@ -1,21 +1,20 @@
 import {ReactElement, useState, useMemo} from 'react';
-import { useSelector } from 'react-redux';
 
 import PlacesList from 'src/components/places-list/place-list.tsx';
 import Map from 'src/components/map/map.tsx';
-import {StateI} from 'src/store/reducer.ts';
 import CitiesList from 'src/components/cities-list/cities-list.tsx';
 import {CITIES} from 'src/mocks';
 import Sort from 'src/components/sort/sort.tsx';
 import {SortType} from 'src/types';
 import {sortByPrice, sortByRating} from 'src/helpers';
+import {useAppSelector} from 'src/hooks/redux.ts';
 
 
 function MainPage(): ReactElement {
   const [activeLocationId, setActiveLocationId] = useState<null | string>(null);
-  const allOffers = useSelector((store: StateI) => store.offers);
-  const city = useSelector((store: StateI) => store.city);
-  const sortBy = useSelector((store: StateI) => store.sortBy);
+  const allOffers = useAppSelector((store) => store.offers);
+  const city = useAppSelector((store) => store.city);
+  const sortBy = useAppSelector((store) => store.sortBy);
 
 
   const currentCityOffers = useMemo(

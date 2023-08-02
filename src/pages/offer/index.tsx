@@ -1,5 +1,4 @@
 import {ReactElement, useMemo, useState} from 'react';
-import {useSelector} from 'react-redux';
 // import { useParams } from 'react-router-dom';
 
 import FeedbackForm from 'src/components/feedback-form/feedback-form.tsx';
@@ -8,14 +7,14 @@ import ReviewsList from 'src/components/reviews-list/place-list.tsx';
 import {REVIEWS} from 'src/mocks';
 import Map from 'src/components/map/map.tsx';
 import PlacesList from 'src/components/places-list/place-list.tsx';
-import {StateI} from 'src/store/reducer.ts';
+import {useAppSelector} from 'src/hooks/redux.ts';
 
 function OfferPage(): ReactElement {
   const [activeLocationId, setActiveLocationId] = useState<null | string>(null);
   // const { offerId } = useParams<{ offerId: string }>();
   const authStatus: AuthorizationStatus = AuthorizationStatus.Auth;
-  const allOffers = useSelector((store: StateI) => store.offers);
-  const city = useSelector((store: StateI) => store.city);
+  const allOffers = useAppSelector((store) => store.offers);
+  const city = useAppSelector((store) => store.city);
 
   const currentCityOffers = useMemo(
     () => allOffers?.filter((offer) => offer.city.name === city.name) || [],

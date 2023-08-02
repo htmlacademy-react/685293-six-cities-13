@@ -5,7 +5,6 @@ import {CITIES, placeCardsMock} from 'src/mocks';
 
 import {addOffers, changeCity, changeSortBy} from './action.ts';
 
-
 export interface StateI {
   city: City;
   offers: null | Offer[];
@@ -19,16 +18,16 @@ const initialState: StateI = {
 };
 
 const reducer = createReducer(initialState, (builder)=>{
-  builder.addCase(changeCity, (state, payload) => {
-    state.city = payload.payload;
+  builder.addCase(changeCity, (state, action) => {
+    state.city = action.payload;
   });
 
   builder.addCase(addOffers, (state) => {
     state.offers = null;
   });
 
-  builder.addCase(changeSortBy, (state, payload) => {
-    state.sortBy = payload.payload;
+  builder.addCase(changeSortBy, (state, action) => {
+    state.sortBy = action.payload;
   });
 });
 

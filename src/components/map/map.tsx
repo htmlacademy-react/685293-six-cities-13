@@ -1,12 +1,11 @@
 import {useRef, useEffect, ReactElement} from 'react';
 import leaflet from 'leaflet';
-import {useSelector} from 'react-redux';
 import 'leaflet/dist/leaflet.css';
 
 import useMap from 'src/hooks/map.ts';
 import {Offer} from 'src/types';
 
-import {StateI} from 'src/store/reducer.ts';
+import {useAppSelector} from '../../hooks/redux.ts';
 
 const URL_MARKER_DEFAULT = '/img/pin.svg';
 const URL_MARKER_CURRENT = '/img/pin-active.svg';
@@ -19,7 +18,7 @@ interface MapProps {
 function Map(props: MapProps): ReactElement {
   const {className = '', activeLocationId, places} = props;
   const mapRef = useRef<null | HTMLElement>(null);
-  const city = useSelector((store: StateI) => store.city);
+  const city = useAppSelector((store) => store.city);
 
   const map = useMap(mapRef, city);
 

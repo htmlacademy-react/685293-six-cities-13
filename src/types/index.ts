@@ -1,3 +1,4 @@
+import {store} from 'src/store';
 
 export const PlaceType = {
   apartment: 'Apartment',
@@ -48,3 +49,7 @@ export const SortType = {
   priceDesc: 'Price: high to low',
   rating: 'Top rated first',
 } as const;
+
+export type State = ReturnType<typeof store.getState>
+
+export type AppDispatch = typeof store.dispatch
