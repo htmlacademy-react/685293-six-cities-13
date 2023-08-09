@@ -1,14 +1,14 @@
 import {createReducer} from '@reduxjs/toolkit';
 
-import {City, Offer, SortType} from 'src/types';
+import {City, Offer, SortType, User} from 'src/types';
 import {CITIES} from 'src/mocks';
 import {AuthorizationStatus} from 'src/router/private-route';
 
 import {
-  addOffers,
+  addOffers, addUserData,
   changeCity,
   changeSortBy,
-  loadOffers,
+  loadOffers, removeUserData,
   requireAuthorization,
   setOffersDataLoadingStatus
 } from './action.ts';
@@ -19,6 +19,7 @@ export interface StateI {
   sortBy: string;
   authorizationStatus: AuthorizationStatus;
   questionsLoadingStatus: boolean;
+  user: User | null;
 }
 
 const initialState: StateI = {
@@ -26,7 +27,8 @@ const initialState: StateI = {
   offers: [],
   sortBy: SortType.popular,
   authorizationStatus: AuthorizationStatus.Unknown,
-  questionsLoadingStatus: false
+  questionsLoadingStatus: false,
+  user: null
 };
 
 const reducer = createReducer(initialState, (builder)=>{
@@ -52,6 +54,14 @@ const reducer = createReducer(initialState, (builder)=>{
 
   builder.addCase(setOffersDataLoadingStatus, (state, action) => {
     state.questionsLoadingStatus = action.payload;
+  });
+
+  builder.addCase(addUserData, (state, action) => {
+    state.user = action.payload;
+  });
+
+  builder.addCase(removeUserData, (state) => {
+    state.user = null;
   });
 });
 

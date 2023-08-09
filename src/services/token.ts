@@ -4,7 +4,7 @@ export type Token = string
 
 export const getToken = (): Token => {
   const token = localStorage.getItem(AUTH_TOKEN_KEY_NAME);
-  return token ?? '';
+  return token ?? 'no_token';
 };
 
 export const saveToken = (token: Token): void => {

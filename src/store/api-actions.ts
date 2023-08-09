@@ -5,7 +5,7 @@ import {APIRoute, AppDispatch, AuthData, Offer, State, User} from 'src/types';
 import {dropToken, saveToken} from 'src/services/token.ts';
 import {AuthorizationStatus} from 'src/router/private-route';
 
-import {loadOffers, requireAuthorization, setOffersDataLoadingStatus} from './action.ts';
+import {addUserData, loadOffers, requireAuthorization, setOffersDataLoadingStatus} from './action.ts';
 
 export const loginAction = createAsyncThunk<void, AuthData, {
     dispatch: AppDispatch;
@@ -14,9 +14,16 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 }>(
   'login',
   async ({ email, password}, {dispatch, extra: api}) => {
-    const {data: {token}} = await api.post<User>(APIRoute.Login, {email, password});
+    const {data: {token, email: userEmail, name, isPro, avatarUrl}} = await api.post<User>(APIRoute.Login, {email, password});
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(addUserData({
+      email:userEmail,
+      name,
+      isPro,
+      avatarUrl,
+      token: 'broken_token'
+    }));
   },
 );
 
