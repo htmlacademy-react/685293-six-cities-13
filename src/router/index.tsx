@@ -5,7 +5,7 @@ import MainPage from 'src/pages/main';
 import LoginPage from 'src/pages/login';
 import OfferPage from 'src/pages/offer';
 import Page404 from 'src/pages/404';
-import PrivateRoute, {AuthorizationStatus} from './private-route';
+import PrivateRoute from './private-route';
 import FavoritesPage from '../pages/favorites';
 import Layout from '../components/layout/layout.tsx';
 
@@ -26,7 +26,7 @@ const Router: React.FC = () => (
 
     <Route path={AppRoute.Favorites} element={<Layout withFooter/>}>
       <Route index element={
-        <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+        <PrivateRoute>
           <FavoritesPage/>
         </PrivateRoute>
       }
