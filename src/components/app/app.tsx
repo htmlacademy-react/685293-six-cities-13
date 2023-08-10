@@ -10,7 +10,7 @@ function App():ReactElement {
   const dispatch = useAppDispatch();
 
   // const authorizationStatus = useAppSelector((state)=> state.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state)=> state.questionsLoadingStatus);
+  const isOffersDataLoading = useAppSelector((state)=> state.offersLoadingStatus);
 
   useEffect(() => {
     dispatch(fetchOffersAction());

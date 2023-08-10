@@ -29,6 +29,19 @@ export interface Offer {
   previewImage: string;
 }
 
+export interface CurrentOffer extends Offer{
+  bedrooms: number;
+  goods: string[];
+  description: string;
+  host: {
+    name: string;
+    avatarUrl: string;
+    isPro: boolean;
+  };
+  images: string[];
+  maxAdults: number;
+}
+
 export interface User {
   name: string;
   avatarUrl: string;
@@ -64,5 +77,6 @@ export interface AuthData {
 export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
-  Offers = '/offers'
+  Offers = '/offers',
+  Comments = '/comments'
 }

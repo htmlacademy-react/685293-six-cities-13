@@ -7,15 +7,14 @@ import {CITIES} from 'src/mocks';
 import Sort from 'src/components/sort/sort.tsx';
 import {SortType} from 'src/types';
 import {sortByPrice, sortByRating} from 'src/helpers';
-import {useAppSelector} from 'src/hooks/redux.ts';
-
+import { useAppSelector} from 'src/hooks/redux.ts';
 
 function MainPage(): ReactElement {
+
   const [activeLocationId, setActiveLocationId] = useState<null | string>(null);
   const allOffers = useAppSelector((store) => store.offers);
   const city = useAppSelector((store) => store.city);
   const sortBy = useAppSelector((store) => store.sortBy);
-
 
   const currentCityOffers = useMemo(
     () => allOffers?.filter((offer) => offer.city.name === city.name) || [],
@@ -82,7 +81,6 @@ function MainPage(): ReactElement {
         </div>
       </main>
     </div>
-
   );
 }
 

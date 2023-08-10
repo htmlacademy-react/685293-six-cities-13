@@ -1,33 +1,39 @@
 import {createReducer} from '@reduxjs/toolkit';
 
-import {City, Offer, SortType, User} from 'src/types';
+import {City, CurrentOffer, Offer, Review, SortType, User} from 'src/types';
 import {CITIES} from 'src/mocks';
 import {AuthorizationStatus} from 'src/router/private-route';
 
 import {
-  addOffers, addUserData,
+  addOffers, addReviews, addUserData,
   changeCity,
-  changeSortBy,
+  changeSortBy, loadOffer,
   loadOffers, removeUserData,
-  requireAuthorization,
+  requireAuthorization, setOfferDataLoadingStatus,
   setOffersDataLoadingStatus
 } from './action.ts';
 
 export interface StateI {
   city: City;
   offers: Offer[];
+  offer: CurrentOffer | null;
   sortBy: string;
   authorizationStatus: AuthorizationStatus;
-  questionsLoadingStatus: boolean;
+  offersLoadingStatus: boolean;
+  offerLoadingStatus: boolean;
   user: User | null;
+  reviews: Review[];
 }
 
 const initialState: StateI = {
   city: CITIES[0],
   offers: [],
+  reviews: [],
+  offer: null,
   sortBy: SortType.popular,
   authorizationStatus: AuthorizationStatus.Unknown,
-  questionsLoadingStatus: false,
+  offersLoadingStatus: false,
+  offerLoadingStatus: false,
   user: null
 };
 
@@ -48,12 +54,20 @@ const reducer = createReducer(initialState, (builder)=>{
     state.offers = action.payload;
   });
 
+  builder.addCase(loadOffer, (state, action) => {
+    state.offer = action.payload;
+  });
+
   builder.addCase(requireAuthorization, (state, action) => {
     state.authorizationStatus = action.payload;
   });
 
   builder.addCase(setOffersDataLoadingStatus, (state, action) => {
-    state.questionsLoadingStatus = action.payload;
+    state.offersLoadingStatus = action.payload;
+  });
+
+  builder.addCase(setOfferDataLoadingStatus, (state, action) => {
+    state.offerLoadingStatus = action.payload;
   });
 
   builder.addCase(addUserData, (state, action) => {
@@ -62,6 +76,9 @@ const reducer = createReducer(initialState, (builder)=>{
 
   builder.addCase(removeUserData, (state) => {
     state.user = null;
+  });
+  builder.addCase(addReviews, (state, action) => {
+    state.reviews = action.payload;
   });
 });
 
