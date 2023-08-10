@@ -1,18 +1,19 @@
 import {createReducer} from '@reduxjs/toolkit';
 
-import {City, CurrentOffer, Offer, Review, SortType, User} from 'src/types';
-import {CITIES} from 'src/mocks';
+import {AppErrors, City, CurrentOffer, Offer, Review, SortType, User} from 'src/types';
 import {AuthorizationStatus} from 'src/router/private-route';
+import {DEFAULT_CITY} from 'src/helpers/constants.ts';
 
 import {
-  addCities, addCurrentCity,
+  addCities, addCurrentCity, addNearOffers,
   addOffers, addReviews, addUserData,
   changeCity,
   changeSortBy, loadOffer,
   loadOffers, removeUserData,
-  requireAuthorization, setOfferDataLoadingStatus,
+  requireAuthorization, setAppError, setOfferDataLoadingStatus,
   setOffersDataLoadingStatus
 } from './action.ts';
+
 
 export interface StateI {
   city: City;
@@ -25,10 +26,12 @@ export interface StateI {
   offerLoadingStatus: boolean;
   user: User | null;
   reviews: Review[];
+  nearOffers: Offer[];
+  error: null | AppErrors;
 }
 
 const initialState: StateI = {
-  city: CITIES[0],
+  city: DEFAULT_CITY,
   cities: [],
   offers: [],
   reviews: [],
@@ -37,7 +40,9 @@ const initialState: StateI = {
   authorizationStatus: AuthorizationStatus.Unknown,
   offersLoadingStatus: false,
   offerLoadingStatus: false,
-  user: null
+  user: null,
+  nearOffers: [],
+  error: null
 };
 
 const reducer = createReducer(initialState, (builder)=>{
@@ -88,6 +93,12 @@ const reducer = createReducer(initialState, (builder)=>{
   });
   builder.addCase(addCurrentCity, (state, action) => {
     state.city = action.payload;
+  });
+  builder.addCase(addNearOffers, (state, action) => {
+    state.nearOffers = action.payload;
+  });
+  builder.addCase(setAppError, (state, action) => {
+    state.error = action.payload;
   });
 });
 

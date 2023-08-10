@@ -1,15 +1,15 @@
-import {ReactElement, useEffect, useMemo, useState} from 'react';
+import {ReactElement, useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 
 import FeedbackForm from 'src/components/feedback-form/feedback-form.tsx';
 import {AuthorizationStatus} from 'src/router/private-route';
 import ReviewsList from 'src/components/reviews-list/place-list.tsx';
-// import {REVIEWS} from 'src/mocks';
 import Map from 'src/components/map/map.tsx';
 import PlacesList from 'src/components/places-list/place-list.tsx';
 import {useAppDispatch, useAppSelector} from 'src/hooks/redux.ts';
-import {fetchOfferAction, fetchReviews} from 'src/store/api-actions.ts';
+import {fetchNearOffers, fetchOfferAction, fetchReviews} from 'src/store/api-actions.ts';
 import {getWidthFromStarsRating} from 'src/helpers';
+import PageSpinner from 'src/components/page-spinner/page-spinner.tsx';
 
 function OfferPage(): ReactElement {
   const dispatch = useAppDispatch();
@@ -19,25 +19,24 @@ function OfferPage(): ReactElement {
   const { offerId } = useParams<{ offerId: string }>();
 
   const authStatus: AuthorizationStatus = AuthorizationStatus.Auth;
-  const allOffers = useAppSelector((store) => store.offers);
+  const nearOffers = useAppSelector((store) => store.nearOffers);
   const currentOffer = useAppSelector((store) => store.offer);
-  const city = useAppSelector((store) => store.city);
   const reviews = useAppSelector((store) => store.reviews);
-
+  const isOfferDataLoading = useAppSelector((state)=> state.offerLoadingStatus);
 
   useEffect(() => {
     if (offerId) {
       dispatch(fetchOfferAction(offerId));
       dispatch(fetchReviews(offerId));
+      dispatch(fetchNearOffers(offerId));
     }
   }, [dispatch, offerId]);
 
-  const currentCityOffers = useMemo(
-    () => allOffers?.filter((offer) => offer.city.name === city.name) || [],
-    [allOffers, city]
-  );
-
   const starsRatingWidth = currentOffer?.rating ? getWidthFromStarsRating(currentOffer?.rating) : '';
+
+  if (isOfferDataLoading) {
+    return <PageSpinner/>;
+  }
 
   return (
     <div className="page">
@@ -45,48 +44,19 @@ function OfferPage(): ReactElement {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/room.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-02.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-03.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/studio-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
+              {
+                currentOffer?.images.map((image) =>
+                  (
+                    <div key={image} className="offer__image-wrapper">
+                      <img
+                        className="offer__image"
+                        src={image}
+                        alt="Photo studio"
+                      />
+                    </div>
+                  )
+                )
+              }
             </div>
           </div>
           {
@@ -169,7 +139,7 @@ function OfferPage(): ReactElement {
             </div>
           }
 
-          <Map activeLocationId={activeLocationId} className={'offer__map'} places={currentCityOffers}/>
+          <Map activeLocationId={activeLocationId} className={'offer__map'} places={nearOffers}/>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -177,7 +147,7 @@ function OfferPage(): ReactElement {
               Other places in the neighbourhood
             </h2>
             <div className="near-places__list places__list">
-              <PlacesList cardsClassName={'near-places__card'} setActiveLocationId={setActiveLocationId} places={currentCityOffers}/>
+              <PlacesList cardsClassName={'near-places__card'} setActiveLocationId={setActiveLocationId} places={nearOffers}/>
             </div>
           </section>
         </div>

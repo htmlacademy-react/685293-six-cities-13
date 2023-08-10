@@ -1,7 +1,16 @@
-import {ReactElement} from 'react';
+import {ReactElement, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 
+import {useAppDispatch} from 'src/hooks/redux.ts';
+import {setAppError} from 'src/store/action.ts';
+import {AppRoute} from 'src/router';
 
 function Page404(): ReactElement {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setAppError(null));
+  }, [dispatch]);
 
   return (
     <div className="page page--gray page--login">
@@ -9,7 +18,7 @@ function Page404(): ReactElement {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link to={AppRoute.Main} className="header__logo-link">
                 <img
                   className="header__logo"
                   src="img/logo.svg"
@@ -17,7 +26,7 @@ function Page404(): ReactElement {
                   width={81}
                   height={41}
                 />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -27,13 +36,6 @@ function Page404(): ReactElement {
           <section className="login">
             <h1 className="login__title">404</h1>
             <h2 className="login__title">Page not found</h2>
-          </section>
-          <section className="locations locations--login locations--current">
-            <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
-            </div>
           </section>
         </div>
       </main>

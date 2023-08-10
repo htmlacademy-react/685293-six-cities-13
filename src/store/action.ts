@@ -1,6 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
 
-import {City, CurrentOffer, Offer, Review, User} from 'src/types';
+import {AppErrors, City, CurrentOffer, Offer, Review, User} from 'src/types';
 import {AuthorizationStatus} from 'src/router/private-route';
 
 export const changeCity = createAction<City>('changeCity');
@@ -16,3 +16,5 @@ export const removeUserData = createAction('removeUserData');
 export const addReviews = createAction<Review[]>('addReviews');
 export const addCities = createAction<City[]>('addCities');
 export const addCurrentCity = createAction<City>('addCurrentCity');
+export const addNearOffers = createAction<Offer[]>('addNearOffers');
+export const setAppError = createAction<AppErrors | null>('setAppError');

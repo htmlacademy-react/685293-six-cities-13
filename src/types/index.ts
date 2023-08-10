@@ -86,3 +86,7 @@ export interface ReviewRequest {
   rating: number;
   offerId: string;
 }
+
+export enum AppErrors {
+  NotFound = 'notFound'
+}
