@@ -14,3 +14,5 @@ export const setOfferDataLoadingStatus = createAction<boolean>('setOfferDataLoad
 export const addUserData = createAction<User>('addUserData');
 export const removeUserData = createAction('removeUserData');
 export const addReviews = createAction<Review[]>('addReviews');
+export const addCities = createAction<City[]>('addCities');
+export const addCurrentCity = createAction<City>('addCurrentCity');

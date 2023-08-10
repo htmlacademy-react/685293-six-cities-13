@@ -80,3 +80,9 @@ export enum APIRoute {
   Offers = '/offers',
   Comments = '/comments'
 }
+
+export interface ReviewRequest {
+  comment: string;
+  rating: number;
+  offerId: string;
+}

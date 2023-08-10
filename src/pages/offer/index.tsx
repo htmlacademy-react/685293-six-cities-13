@@ -162,7 +162,7 @@ function OfferPage(): ReactElement {
                   </h2>
                   <ReviewsList reviews={reviews}/>
                   {
-                    authStatus === AuthorizationStatus.Auth && <FeedbackForm/>
+                    authStatus === AuthorizationStatus.Auth && <FeedbackForm offerId={currentOffer.id}/>
                   }
                 </section>
               </div>

@@ -5,6 +5,7 @@ import {CITIES} from 'src/mocks';
 import {AuthorizationStatus} from 'src/router/private-route';
 
 import {
+  addCities, addCurrentCity,
   addOffers, addReviews, addUserData,
   changeCity,
   changeSortBy, loadOffer,
@@ -15,6 +16,7 @@ import {
 
 export interface StateI {
   city: City;
+  cities: City[];
   offers: Offer[];
   offer: CurrentOffer | null;
   sortBy: string;
@@ -27,6 +29,7 @@ export interface StateI {
 
 const initialState: StateI = {
   city: CITIES[0],
+  cities: [],
   offers: [],
   reviews: [],
   offer: null,
@@ -79,6 +82,12 @@ const reducer = createReducer(initialState, (builder)=>{
   });
   builder.addCase(addReviews, (state, action) => {
     state.reviews = action.payload;
+  });
+  builder.addCase(addCities, (state, action) => {
+    state.cities = action.payload;
+  });
+  builder.addCase(addCurrentCity, (state, action) => {
+    state.city = action.payload;
   });
 });
 

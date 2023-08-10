@@ -1,11 +1,12 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 
-import {APIRoute, AppDispatch, AuthData, CurrentOffer, Offer, Review, State, User} from 'src/types';
+import {APIRoute, AppDispatch, AuthData, CurrentOffer, Offer, Review, ReviewRequest, State, User} from 'src/types';
 import {dropToken, saveToken} from 'src/services/token.ts';
 import {AuthorizationStatus} from 'src/router/private-route';
 
 import {
+  addCities, addCurrentCity,
   addReviews,
   addUserData,
   loadOffer,
@@ -13,6 +14,7 @@ import {
   requireAuthorization,
   setOffersDataLoadingStatus
 } from './action.ts';
+import {getCitiesFromOffers, getDefaultCity} from '../helpers';
 
 export const loginAction = createAsyncThunk<void, AuthData, {
     dispatch: AppDispatch;
@@ -71,9 +73,16 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   'fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setOffersDataLoadingStatus(true));
+
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
-    dispatch(setOffersDataLoadingStatus(false));
+    const cities = getCitiesFromOffers(data);
+    const defaultCity = getDefaultCity(cities);
+
     dispatch(loadOffers(data));
+    dispatch(addCities(cities));
+    dispatch(addCurrentCity(defaultCity));
+
+    dispatch(setOffersDataLoadingStatus(false));
   },
 );
 
@@ -98,5 +107,18 @@ export const fetchReviews = createAsyncThunk<void, string, {
   async (arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Review[]>(`${APIRoute.Comments}/${arg}`);
     dispatch(addReviews(data));
+  },
+);
+
+export const makeReview = createAsyncThunk<void, ReviewRequest, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'makeReview',
+  async ({comment, rating,offerId}, {dispatch, extra: api, getState}) => {
+    const {data} = await api.post<Review>(`${APIRoute.Comments}/${offerId}`, {comment, rating});
+    const reviews = getState().reviews;
+    dispatch(addReviews([data, ...reviews]));
   },
 );
