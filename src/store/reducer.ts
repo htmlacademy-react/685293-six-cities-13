@@ -1,34 +1,48 @@
 import {createReducer} from '@reduxjs/toolkit';
 
-import {City, Offer, SortType, User} from 'src/types';
-import {CITIES} from 'src/mocks';
+import {AppErrors, City, CurrentOffer, Offer, Review, SortType, User} from 'src/types';
 import {AuthorizationStatus} from 'src/router/private-route';
+import {DEFAULT_CITY} from 'src/helpers/constants.ts';
 
 import {
-  addOffers, addUserData,
+  addCities, addCurrentCity, addNearOffers,
+  addOffers, addReviews, addUserData,
   changeCity,
-  changeSortBy,
+  changeSortBy, loadOffer,
   loadOffers, removeUserData,
-  requireAuthorization,
+  requireAuthorization, setAppError, setOfferDataLoadingStatus,
   setOffersDataLoadingStatus
 } from './action.ts';
 
+
 export interface StateI {
   city: City;
+  cities: City[];
   offers: Offer[];
+  offer: CurrentOffer | null;
   sortBy: string;
   authorizationStatus: AuthorizationStatus;
-  questionsLoadingStatus: boolean;
+  offersLoadingStatus: boolean;
+  offerLoadingStatus: boolean;
   user: User | null;
+  reviews: Review[];
+  nearOffers: Offer[];
+  error: null | AppErrors;
 }
 
 const initialState: StateI = {
-  city: CITIES[0],
+  city: DEFAULT_CITY,
+  cities: [],
   offers: [],
+  reviews: [],
+  offer: null,
   sortBy: SortType.popular,
   authorizationStatus: AuthorizationStatus.Unknown,
-  questionsLoadingStatus: false,
-  user: null
+  offersLoadingStatus: false,
+  offerLoadingStatus: false,
+  user: null,
+  nearOffers: [],
+  error: null
 };
 
 const reducer = createReducer(initialState, (builder)=>{
@@ -48,12 +62,20 @@ const reducer = createReducer(initialState, (builder)=>{
     state.offers = action.payload;
   });
 
+  builder.addCase(loadOffer, (state, action) => {
+    state.offer = action.payload;
+  });
+
   builder.addCase(requireAuthorization, (state, action) => {
     state.authorizationStatus = action.payload;
   });
 
   builder.addCase(setOffersDataLoadingStatus, (state, action) => {
-    state.questionsLoadingStatus = action.payload;
+    state.offersLoadingStatus = action.payload;
+  });
+
+  builder.addCase(setOfferDataLoadingStatus, (state, action) => {
+    state.offerLoadingStatus = action.payload;
   });
 
   builder.addCase(addUserData, (state, action) => {
@@ -62,6 +84,21 @@ const reducer = createReducer(initialState, (builder)=>{
 
   builder.addCase(removeUserData, (state) => {
     state.user = null;
+  });
+  builder.addCase(addReviews, (state, action) => {
+    state.reviews = action.payload;
+  });
+  builder.addCase(addCities, (state, action) => {
+    state.cities = action.payload;
+  });
+  builder.addCase(addCurrentCity, (state, action) => {
+    state.city = action.payload;
+  });
+  builder.addCase(addNearOffers, (state, action) => {
+    state.nearOffers = action.payload;
+  });
+  builder.addCase(setAppError, (state, action) => {
+    state.error = action.payload;
   });
 });
 

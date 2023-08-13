@@ -1,23 +1,28 @@
 import {ReactElement, SyntheticEvent, useState, ChangeEvent, useMemo} from 'react';
 
+import {useAppDispatch} from 'src/hooks/redux.ts';
+import {makeReview} from 'src/store/api-actions.ts';
+
 interface FormData {
-  feedback: string;
+  comment: string;
   rating: number;
 }
-function FeedbackForm(): ReactElement {
+function FeedbackForm(props: {offerId: string}): ReactElement {
+  const {offerId} = props;
+  const dispatch = useAppDispatch();
 
   const [formData, setFormData] = useState<FormData>({
-    feedback: '',
+    comment: '',
     rating: 0
   });
 
   const onSubmitReviewForm = (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log(formData);
+    dispatch(makeReview({...formData, offerId}));
   };
 
   const onChangeReview = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setFormData({...formData, feedback: e.target.value});
+    setFormData({...formData, comment: e.target.value});
   };
 
   const onChangeRating = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,8 +31,8 @@ function FeedbackForm(): ReactElement {
 
   const isSubmitButtonDisabled = useMemo(
     () => {
-      const {feedback, rating} = formData;
-      return !(feedback.length >= 50 && rating > 0);
+      const {comment, rating} = formData;
+      return !(comment.length >= 50 && rating > 0);
     },
     [formData]
   );
@@ -130,7 +135,7 @@ function FeedbackForm(): ReactElement {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={formData.feedback}
+        value={formData.comment}
         onChange={onChangeReview}
       />
       <div className="reviews__button-wrapper">

@@ -13,7 +13,8 @@ export enum AppRoute {
   Main='/',
   Login='/login',
   Favorites = '/favorites',
-  Offer='/offer'
+  Offer='/offer',
+  NotFound='/404'
 }
 
 const Router: React.FC = () => (
@@ -37,6 +38,7 @@ const Router: React.FC = () => (
       <Route index element={<OfferPage/>}/>
     </Route>
 
+    <Route path={AppRoute.NotFound} element={<Page404/>} />
     <Route path='*' element={<Page404/>} />
   </Routes>
 );
